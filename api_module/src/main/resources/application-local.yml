@@ -1,0 +1,13 @@
+server:
+  port: 5001
+
+spring:
+  jpa:
+    show-sql: true
+    database: mysql
+  datasource:
+    username: root
+    password: admin
+    url: jdbc:mysql://localhost:3306/coin_notice?characterEncoding=UTF-8&serverTimezone=Asia/Seoul&useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+

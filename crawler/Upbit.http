@@ -1,0 +1,6 @@
+GET http://localhost:5001/notice/UPBIT
+Accept: application/json
+
+###
+GET https://upbit.com/service_center/notice?id=2168
+
