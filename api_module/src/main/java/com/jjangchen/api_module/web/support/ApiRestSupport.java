@@ -2,8 +2,6 @@ package com.jjangchen.api_module.web.support;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonObject;
-import com.jjangchen.api_module.model.Notice;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 
 public abstract class ApiRestSupport {
