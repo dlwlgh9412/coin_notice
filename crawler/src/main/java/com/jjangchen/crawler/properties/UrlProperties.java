@@ -13,4 +13,19 @@ import org.springframework.context.annotation.PropertySource;
 public class UrlProperties {
     @Value("${upbit.eventUrl}")
     private String upbitEventUrl;
+
+    @Value("${upbit.endPoint}")
+    private String upbitEndPoint;
+
+    @Value("${binance.endPoint}")
+    private String binanceEndPoint;
+
+    @Value("${coinbase.endPoint}")
+    private String coinBaseEndPoint;
+
+    @Value("${bithumb.endPoint}")
+    private String bithumbEndPoint;
+
+    @Value("${coinone.endPoint}")
+    private String coinoneEndPoint;
 }

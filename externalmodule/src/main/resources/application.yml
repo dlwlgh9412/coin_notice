@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: localhost
+  mvc:
+    converters:
+      preferred-json-mapper: gson
+  cache:
+    jcache:
+      config: classpath:ehcache-config.xml

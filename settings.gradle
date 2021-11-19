@@ -1,5 +1,5 @@
 rootProject.name = 'coin_exchange_notice'
 include 'common'
 include 'crawler'
-include 'api_module'
+include 'externalmodule'
 

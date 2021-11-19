@@ -4,13 +4,9 @@ public enum Exchange {
     ALL("ALL"),
     UPBIT("UPBIT"),
     BITHUMB("BITHUMB"),
-    GDAC("GDAC"),
-    OKEX("OKEX"),
-    BITSONIC("BITSONIC"),
-    HUOBI("HOUBI"),
-    COINONE("COINONE"),
     BINANCE("BINANCE"),
-    BITFINEX("BITFINEX");
+    COINONE("COINONE"),
+    COINBASE("COINBASE");
 
     String exchange;
 

@@ -20,9 +20,6 @@ public class ExchangeEntity {
     @Enumerated(EnumType.STRING)
     private Exchange exchange;
 
-    @OneToMany(mappedBy = "exchange")
-    private List<NoticeEntity> noticeEntityList = new ArrayList<>();
-
     @Column(name = "OVERSEA")
     private Boolean oversea;
 

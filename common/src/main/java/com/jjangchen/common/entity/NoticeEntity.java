@@ -14,9 +14,7 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
-@Builder
 @Entity(name = "TBL_NOTICE")
 public class NoticeEntity implements Persistable<Long> {
     @Id
@@ -26,9 +24,9 @@ public class NoticeEntity implements Persistable<Long> {
     @Column(name = "NOTICE_ID")
     private BigDecimal noticeId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "exchange")
-    private ExchangeEntity exchange;
+    @Column(name = "EXCHANGE")
+    @Enumerated(EnumType.STRING)
+    private Exchange exchange;
 
     @Column(name = "KIND")
     @Enumerated(EnumType.STRING)
@@ -52,15 +50,23 @@ public class NoticeEntity implements Persistable<Long> {
     private ZonedDateTime updDtime;
 
     public Exchange getExchange() {
-        return this.exchange.getExchange();
-    }
-
-    public Boolean getOversea() {
-        return this.exchange.getOversea();
+        return this.exchange;
     }
 
     @Override
     public boolean isNew() {
         return id == null;
+    }
+
+    @Builder
+    public NoticeEntity(BigDecimal noticeId, Exchange exchange, NoticeKind noticeKind, String title, String url, ZonedDateTime createdAt, ZonedDateTime regDtime, ZonedDateTime updDtime) {
+        this.noticeId = noticeId;
+        this.exchange = exchange;
+        this.kind = noticeKind;
+        this.title = title;
+        this.url = url;
+        this.createdAt = createdAt;
+        this.regDtime = regDtime;
+        this.updDtime = updDtime;
     }
 }

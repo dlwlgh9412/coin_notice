@@ -1,6 +1,0 @@
-spring:
-  profiles:
-    active: local
-  mvc:
-    converters:
-      preferred-json-mapper: gson

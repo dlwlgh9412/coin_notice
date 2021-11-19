@@ -36,3 +36,7 @@ out/
 ### VS Code ###
 .vscode/
 awsDbpassword.txt
+jjangchen.pem
+/externalmodule/src/main/resources/
+/crawler/src/main/resources/
+/common/src/main/resources/

@@ -1,22 +1,10 @@
 package com.jjangchen.common.repository;
 
 import com.jjangchen.common.entity.NoticeEntity;
-import com.jjangchen.common.model.Exchange;
-import com.jjangchen.common.model.NoticeKind;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.jjangchen.common.repository.custom.NoticeCustomRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
 @Repository
-public interface NoticeRepository extends JpaRepository<NoticeEntity, Long> {
-    @Query(value = "SELECT MAX(NOTICE_ID) FROM COIN_NOTICE.TBL_NOTICE INNER JOIN TBL_EXCHANGE TOE ON TBL_NOTICE.EXCHANGE = TOE.EXCHANGE WHERE TOE.EXCHANGE = ?1", nativeQuery = true)
-    Optional<BigDecimal> getMaxNoticeId(String noticeExchange);
-
-    @Query(value = "SELECT * FROM COIN_NOTICE.TBL_NOTICE WHERE EXCHANGE = ?1 AND KIND = ?2 AND TITLE LIKE %?3%", nativeQuery = true)
-    Page<NoticeEntity> findNotices(String exchange, String noticeKind, String title, Pageable pageable);
+public interface NoticeRepository extends JpaRepository<NoticeEntity, Long>, NoticeCustomRepository {
 }
