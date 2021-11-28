@@ -12,13 +12,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/*
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @DynamicUpdate
 @Entity(name = "TBL_ACCOUNT")
+
+ */
 public class AccountEntity {
+    /*
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -45,6 +49,8 @@ public class AccountEntity {
     @Column(name = "ROLE")
     @Enumerated
     private Role role;
+
+     */
 
     /*
     @OneToMany(mappedBy = "accountEntity", cascade = CascadeType.ALL)
