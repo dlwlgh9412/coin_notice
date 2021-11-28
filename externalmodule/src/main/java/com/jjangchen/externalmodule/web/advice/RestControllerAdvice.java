@@ -1,6 +1,6 @@
 package com.jjangchen.externalmodule.web.advice;
 
-import com.jjangchen.externalmodule.service.JwtService;
+import com.jjangchen.externalmodule.service.JWTService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Slf4j
 public class RestControllerAdvice {
-    private final JwtService jwtService;
+    private final JWTService jwtService;
 
     @Around("@annotation(ValidJwtToken)")
     public Object validToken(ProceedingJoinPoint joinPoint) throws Throwable {

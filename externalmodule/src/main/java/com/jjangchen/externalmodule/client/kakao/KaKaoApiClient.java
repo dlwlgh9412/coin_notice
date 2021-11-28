@@ -44,11 +44,11 @@ public class KaKaoApiClient {
     }
 
     public Call<KakaoTokenResponse> getToken(String code) throws IOException {
-        return kakaoApiService.getToken(KakaoConstants.KAKAO_AUTH_URL + "/oauth/token", "authorization_code", KakaoConstants.APP_KEY, kakaoConstants.KAKAO_TOKEN_REDIRECT_URI, code);
+        return kakaoApiService.getToken(KakaoConstants.KAKAO_AUTH_URL + "/oauth/token", "authorization_code", kakaoConstants.APP_KEY, kakaoConstants.KAKAO_TOKEN_REDIRECT_URI, code);
     }
 
     public Call<KakaoTokenResponse> reissuedAccessToken(String refreshToken) {
-        return kakaoApiService.reissuedToken(KakaoConstants.KAKAO_AUTH_URL + "/oauth/token", "refresh_token", KakaoConstants.APP_KEY, refreshToken);
+        return kakaoApiService.reissuedToken(KakaoConstants.KAKAO_AUTH_URL + "/oauth/token", "refresh_token", kakaoConstants.APP_KEY, refreshToken);
     }
     public Call<KakaoLogout> logout(String token) {
         return kakaoApiService.logout("Bearer " + token);

@@ -1,24 +1,20 @@
 package com.jjangchen.externalmodule.service;
 
-import com.jjangchen.common.entity.UserEntity;
-import com.jjangchen.common.exception.AccessTokenExpiresException;
-import com.jjangchen.common.repository.UserRepository;
-import com.jjangchen.common.util.CommonUtil;
+import com.jjangchen.common.entity.SocialAccountEntity;
+import com.jjangchen.common.entity.SocialAccountEntityId;
+import com.jjangchen.common.model.Social;
+import com.jjangchen.common.repository.SocialAccountEntityRepository;
 import com.jjangchen.externalmodule.client.kakao.KaKaoApiClient;
 import com.jjangchen.externalmodule.client.kakao.model.KakaoLogout;
 import com.jjangchen.externalmodule.client.kakao.model.KakaoTokenInfo;
 import com.jjangchen.externalmodule.client.kakao.model.KakaoTokenResponse;
 import com.jjangchen.externalmodule.client.kakao.model.KakaoUserInfo;
-import com.jjangchen.externalmodule.web.exception.UserNotFoundException;
-import com.jjangchen.externalmodule.web.model.JwtObject;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.SignatureException;
+import com.jjangchen.externalmodule.dto.KakaoAccountSaveDto;
+import com.jjangchen.externalmodule.dto.JWTResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -28,21 +24,45 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class KakaoService {
     private final KaKaoApiClient kaKaoApiClient;
-    private final JwtService jwtService;
-    private final UserRepository userRepository;
+    private final SocialAccountEntityRepository socialAccountEntityRepository;
+    private final JWTService jwtService;
 
-    public JwtObject issuedJwt(String code) {
-        KakaoTokenResponse kakaoTokenResponse = getKakaoToken(code);
-        return jwtService.getTokenObj(getUserEntity(getUserInfo(kakaoTokenResponse.getAccessToken()), kakaoTokenResponse));
+    public JWTResponseDto requestKakaoToken(String code) {
+        KakaoTokenResponse kakaoTokenResponse = getKakaoToken(code); // 카카오 액세스토큰 발급
+        KakaoUserInfo kakaoUserInfo = getUserInfo(kakaoTokenResponse.getAccessToken());
+        SocialAccountEntity socialAccountEntity = findAccount(kakaoUserInfo, kakaoTokenResponse);
+        return jwtService.getTokenObj(socialAccountEntity);
+    }
+
+    public SocialAccountEntity findAccount(KakaoUserInfo userInfo, KakaoTokenResponse kakaoTokenResponse) {
+        return socialAccountEntityRepository.findById(
+                        SocialAccountEntityId.builder()
+                                .id(userInfo.getId())
+                                .social(Social.KAKAO).build())
+                .orElseGet(() -> insertKakaoAccount(userInfo, kakaoTokenResponse));
+    }
+
+    private SocialAccountEntity insertKakaoAccount(KakaoUserInfo userInfo, KakaoTokenResponse kakaoTokenResponse) {
+        KakaoAccountSaveDto accountSaveDto = KakaoAccountSaveDto.builder()
+                .id(SocialAccountEntityId.builder().id(userInfo.getId()).social(Social.KAKAO).build())
+                .kakaoAccessTokenIssuanceTime(kakaoTokenResponse.getKakaoAccessTokenIssuanceTime())
+                .kakaoAccessToken(kakaoTokenResponse.getAccessToken())
+                .kakaoAccessTokenExpiresIn(kakaoTokenResponse.getExpiresIn().longValue())
+                .kakaoRefreshTokenIssuanceTime(kakaoTokenResponse.getKakaoRefreshTokenIssuanceTime())
+                .kakaoRefreshToken(kakaoTokenResponse.getRefreshToken())
+                .kakaoRefreshTokenExpiresIn(kakaoTokenResponse.getRefreshTokenExpiresIn().longValue())
+                .build();
+        return socialAccountEntityRepository.save(accountSaveDto.toEntity());
     }
 
     // 추가 동의항목
+    /*
     @Transactional
-    public void additionalItemAgreement(String accessToken) throws SignatureException, ExpiredJwtException, UserNotFoundException {
+    public void additionalItemAgreement(String accessToken, String code) throws SignatureException, ExpiredJwtException, UserNotFoundException {
         Claims claims = jwtService.parseToken(accessToken);
-        UserEntity userEntity = userRepository.findById(Long.valueOf(claims.get("id").toString())).orElseThrow(UserNotFoundException::new);
+        UserEntity userEntity = userRepository.findByEmail(claims.get("email").toString()).orElseThrow(UserNotFoundException::new);
         try {
-            CommonUtil.checkExpiresToken(userEntity.getKakaoAccessTokenIssuanceTime(), userEntity.getKakaoAccessTokenExpiresIn(), "Kakao AccessToken Expired");
+            CommonUtil.checkExpiresKakaoToken(userEntity.getKakaoAccessTokenIssuanceTime(), userEntity.getKakaoAccessTokenExpiresIn(), "Kakao AccessToken Expired");
         } catch (AccessTokenExpiresException e) {
             // 카카오 액세스 토큰 만료 시 리프레시 토큰 조회 후 갱신
             log.error(e.getMessage());
@@ -60,25 +80,7 @@ public class KakaoService {
         }
     }
 
-    @Transactional
-    public UserEntity getUserEntity(KakaoUserInfo userInfo, KakaoTokenResponse kakaoTokenResponse) {
-        Long currentTime = CommonUtil.getCurrentTimeToTimestamp();
-        return userRepository.findById(userInfo.getId()).orElseGet(
-                () -> userRepository.save(UserEntity.builder()
-                        .id(userInfo.getId())
-                        .email(!userInfo.getKakaoAccount().getEmailNeedsAgreement() ? userInfo.getKakaoAccount().getEmail() : null)
-                        .profileNickname(!userInfo.getKakaoAccount().getProfileNicknameNeedsAgreement() ? userInfo.getKakaoAccount().getProfile().getNickname() : null)
-                        .profileImageUrl(!userInfo.getKakaoAccount().getProfileImageNeedsAgreement() ? userInfo.getKakaoAccount().getProfile().getProfileImageUrl() : null)
-                        .regDtime(stringToZonedDateTime(userInfo.getConnectedAt()))
-                        .kakaoAccessTokenIssuanceTime(currentTime)
-                        .kakaoAccessToken(kakaoTokenResponse.getAccessToken())
-                        .kakaoAccessTokenExpiresIn(kakaoTokenResponse.getExpiresIn())
-                        .kakaoRefreshTokenIssuanceTime(currentTime)
-                        .kakaoRefreshToken(kakaoTokenResponse.getRefreshToken())
-                        .kakaoRefreshTokenExpiresIn(kakaoTokenResponse.getRefreshTokenExpiresIn())
-                        .build())
-        );
-    }
+     */
 
     private KakaoTokenResponse reissuedAccessToken(String refreshToken) {
         KakaoTokenResponse kakaoTokenResponse = null;
@@ -100,7 +102,7 @@ public class KakaoService {
         return kakaoUserInfo;
     }
 
-    private KakaoTokenResponse getKakaoToken(String code)   {
+    private KakaoTokenResponse getKakaoToken(String code) {
         KakaoTokenResponse kakaoTokenResponse = null;
         try {
             kakaoTokenResponse = kaKaoApiClient.getToken(code).execute().body();

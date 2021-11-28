@@ -10,6 +10,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new CustomInterceptor()).excludePathPatterns("/auth/kakao/login");
+        registry.addInterceptor(new CustomInterceptor()).excludePathPatterns("/oauth/kakao/login", "/oauth/kakao/issuetoken");
     }
 }

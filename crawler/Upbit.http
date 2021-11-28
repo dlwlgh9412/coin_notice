@@ -1,9 +1,8 @@
+###
 GET http://localhost:5001/notice/UPBIT
-Accept: application/json
 
 ###
 GET https://upbit.com/service_center/notice?id=2168
 
 ###
 GET http://localhost:5001/notice/UPBIT?kind=ALL
-Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJqamFuZ2NoZW4iLCJpYXQiOjE2MzYxNzU4MTYsInN1YiI6ImxvZ2luVG9rZW4iLCJhdWQiOiJjb3JpbmlTdWJzY3JpYmVyIiwiZXhwIjoxNjM2MTc3NjE2LCJpZCI6MTkzNDM0NTk1Nn0.ghVJ2xhJMFHfvtdTkJtQJwvbOszjGWw8KD45ewWKoAk

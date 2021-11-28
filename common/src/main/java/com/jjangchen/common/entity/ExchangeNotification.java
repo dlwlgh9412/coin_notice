@@ -13,15 +13,16 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Builder
-@Table(name = "TBL_USER_EXCHANGE_NOTIFICATION")
-public class UserExchangeNotification {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Table(name = "TBL_ACCOUNT_EXCHANGE_NOTIFICATION")
+public class ExchangeNotification {
+    @EmbeddedId
+    private ExchangeNotificationId exchangeNotificationId;
 
+    /*
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
-    private UserEntity user;
+    @JoinColumn(name = "ACCOUNT_ID")
+    private AccountEntity accountEntity;
+     */
 
     @Enumerated(EnumType.STRING)
     @Column(name = "EXCHANGE")

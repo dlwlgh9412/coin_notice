@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface RefreshTokenRepository extends JpaRepository<RefreshTokenEntity, Long> {
-    Optional<String> findByToken(String refreshToken);
+    Optional<RefreshTokenEntity> findByToken(String refreshToken);
 }

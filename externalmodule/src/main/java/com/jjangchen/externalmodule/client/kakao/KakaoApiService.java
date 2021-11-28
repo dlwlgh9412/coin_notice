@@ -13,7 +13,7 @@ public interface KakaoApiService {
     Call<KakaoTokenResponse> getToken(@Url String url,
                                       @Field("grant_type") String grantType,
                                       @Field("client_id") String clientId,
-                                      @Field("redirect_uri") String redirectUrl,
+                                      @Field("redirect_uri") String redirectUri,
                                       @Field("code") String code
             /*@Field("client_secret")String clientSecret*/);
 

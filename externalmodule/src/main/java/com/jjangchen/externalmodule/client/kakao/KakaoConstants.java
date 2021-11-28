@@ -13,7 +13,8 @@ import org.springframework.context.annotation.PropertySource;
 public class KakaoConstants {
     public static String KAKAO_AUTH_URL = "https://kauth.kakao.com";
     public static String KAKAO_API_URL = "https://kapi.kakao.com";
-    public static String APP_KEY = "40c10dd8894fc5d0760fe66fd91b4482";
+    @Value("${kakao.appkey}")
+    public String APP_KEY;
 
     @Value("${kakao.login_page}")
     public String KAKAO_LOGIN_PAGE;

@@ -13,7 +13,7 @@ public class CommonUtil {
         return timestamp.getTime() / 1000;
     }
 
-    public static void checkExpiresToken(Long issuanceTime, Integer expiresIn, String msg) throws AccessTokenExpiresException {
+    public static void checkExpiresKakaoToken(Long issuanceTime, Integer expiresIn, String msg) throws AccessTokenExpiresException {
         if(getCurrentTimeToTimestamp() > issuanceTime + expiresIn)
             throw new AccessTokenExpiresException(msg);
     }

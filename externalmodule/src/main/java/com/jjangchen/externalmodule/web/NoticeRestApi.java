@@ -8,6 +8,7 @@ import com.jjangchen.common.model.NoticeKind;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,8 +33,13 @@ public class NoticeRestApi extends ApiRestSupport {
         return response(noticeService.findNotices(exchange, noticeKind, keyword, page));
     }
 
+    /*
     @PostMapping("/{exchange}")
-    public ResponseEntity<?> setNotification(@RequestParam("setNoti") Boolean noti) {
-        return null;
+    public ResponseEntity<?> setNotification(@RequestHeader("AccessToken") String token,
+                                             @PathVariable Exchange exchange,
+                                             @RequestParam("alarm") Boolean alarm) {
+        return new ResponseEntity<>(noticeService.alarmSetting(token, exchange, alarm), HttpStatus.OK);
     }
+
+     */
 }

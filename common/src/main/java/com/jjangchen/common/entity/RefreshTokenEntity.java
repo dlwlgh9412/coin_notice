@@ -15,8 +15,8 @@ import javax.persistence.*;
 @Table(name = "TBL_REFRESH_TOKEN")
 public class RefreshTokenEntity {
     @Id
-    private Long id;
+    private SocialAccountEntityId socialAccountEntityId;
 
-    @Column(name = "TOKEN")
+    @Column(columnDefinition = "TEXT", name = "TOKEN")
     private String token;
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.jjangchen.externalmodule.client.kakao.KakaoConstants;
 import com.jjangchen.externalmodule.web.exception.BearerException;
 import com.jjangchen.externalmodule.web.exception.EmailNullException;
-import com.jjangchen.externalmodule.web.exception.UserNotFoundException;
+import com.jjangchen.externalmodule.web.exception.AccountNotFoundException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import lombok.RequiredArgsConstructor;
@@ -55,10 +55,10 @@ public class RestControllerExceptionHandler {
                 .build(), HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<?> userNotFound() {
+    @ExceptionHandler(AccountNotFoundException.class)
+    public ResponseEntity<?> notExistAccount() {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Location", kakaoConstants.KAKAO_LOGIN_PAGE);
+        httpHeaders.add("Location", "" /* 계정등록 화면 */);
         return new ResponseEntity<>(httpHeaders, HttpStatus.FOUND);
     }
 
@@ -66,7 +66,7 @@ public class RestControllerExceptionHandler {
     public ResponseEntity<?> emailNull() {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Location", KakaoConstants.KAKAO_AUTH_URL + "/oauth/authorize?client_id=" +
-                KakaoConstants.APP_KEY + "&redirect_uri=" + kakaoConstants.KAKAO_TOKEN_REDIRECT_URI +
+                kakaoConstants.APP_KEY + "&redirect_uri=" + kakaoConstants.KAKAO_TOKEN_REDIRECT_URI +
                 "&response_type=code" + "&scope=account_email");
         return new ResponseEntity<>(httpHeaders, HttpStatus.FOUND);
     }

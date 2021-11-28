@@ -1,4 +1,4 @@
-package com.jjangchen.externalmodule.web.model;
+package com.jjangchen.externalmodule.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 @Builder
-public class JwtObject {
+public class JWTResponseDto {
     private String accessToken;
-
     private String refreshToken;
 }
