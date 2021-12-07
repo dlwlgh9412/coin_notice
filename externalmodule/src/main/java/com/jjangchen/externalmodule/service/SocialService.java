@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 @RequiredArgsConstructor
 @Slf4j
 @Service
-public class KakaoService {
+public class SocialService {
     private final KaKaoApiClient kaKaoApiClient;
     private final SocialAccountEntityRepository socialAccountEntityRepository;
     private final JWTService jwtService;

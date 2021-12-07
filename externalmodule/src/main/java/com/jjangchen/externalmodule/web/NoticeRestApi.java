@@ -1,5 +1,7 @@
 package com.jjangchen.externalmodule.web;
 
+import com.jjangchen.common.model.Role;
+import com.jjangchen.common.model.Social;
 import com.jjangchen.externalmodule.web.advice.ValidJwtToken;
 import com.jjangchen.externalmodule.service.NoticeService;
 import com.jjangchen.externalmodule.web.support.ApiRestSupport;
@@ -24,8 +26,7 @@ public class NoticeRestApi extends ApiRestSupport {
     @ApiResponses({@ApiResponse(code = 200, message = "data: {}")})
     @ApiOperation(value = "거래소별로 공지사항을 페이징 처리하여 로드", notes = "")
     @GetMapping("/{exchange}")
-    @ValidJwtToken
-    public ResponseEntity<?> findNotice(HttpServletRequest request,
+    public ResponseEntity<?> findNotice(
                                         @ApiParam(value = "거래소 이름", required = true) @PathVariable Exchange exchange,
                                         @ApiParam(value = "공지사항 종류") @RequestParam(value = "kind", required = true) NoticeKind noticeKind,
                                         @ApiParam(value = "검색어") @RequestParam(value = "keyword", required = false) String keyword,

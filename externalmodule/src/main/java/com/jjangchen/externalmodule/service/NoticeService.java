@@ -1,7 +1,6 @@
 package com.jjangchen.externalmodule.service;
 
 import com.jjangchen.common.repository.ExchangeNotificationRepository;
-import com.jjangchen.common.repository.AccountRepository;
 import com.jjangchen.externalmodule.web.model.notice.Notice;
 import com.jjangchen.externalmodule.web.model.notice.NoticePageResponse;
 import com.jjangchen.common.entity.NoticeEntity;
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
 @Service
 public class NoticeService {
     private final NoticeCustomRepository noticeRepository;
-    private final AccountRepository accountRepository;
     private final ExchangeNotificationRepository exchangeNotificationRepository;
     private final JWTService jwtService;
 
