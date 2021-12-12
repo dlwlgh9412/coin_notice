@@ -2,7 +2,6 @@ package com.jjangchen.crawler.service.coinbase;
 
 import com.jjangchen.common.model.Exchange;
 import com.jjangchen.common.repository.QuoteRepository;
-import com.jjangchen.crawler.client.CoinbaseRestApiClient;
 import com.jjangchen.crawler.client.quote.coinbase.*;
 import com.jjangchen.crawler.dto.QuoteSaveDto;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +15,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @Slf4j
 public class CoinbaseQuoteService {
+    /*
     private final CoinbaseRestApiClient restApiClient;
     private final QuoteRepository quoteRepository;
 

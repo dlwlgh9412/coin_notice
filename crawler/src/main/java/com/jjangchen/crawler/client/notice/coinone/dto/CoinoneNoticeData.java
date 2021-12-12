@@ -1,6 +1,6 @@
-package com.jjangchen.crawler.client.notice.coinone;
+package com.jjangchen.crawler.client.notice.coinone.dto;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,51 +9,51 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class CoinoneNoticeData {
-    @SerializedName("id")
+    @JsonProperty("id")
     private Long id;
 
-    @SerializedName("card_category")
+    @JsonProperty("card_category")
     private String cardCategory;
 
-    @SerializedName("get_absolute_url")
+    @JsonProperty("get_absolute_url")
     private String getAbsoluteUrl;
 
-    @SerializedName("created_by")
+    @JsonProperty("created_by")
     private CoinoneNoticeDataWriter writer;
 
-    @SerializedName("flagged_content")
+    @JsonProperty("flagged_content")
     private CoinoneNoticeFlaggedContent flaggedContent;
 
-    @SerializedName("vote_type_by_current_user")
+    @JsonProperty("vote_type_by_current_user")
     private String voteTypeByCurrentUser;
 
-    @SerializedName("content_type")
+    @JsonProperty("content_type")
     private Long contentType;
 
-    @SerializedName("board")
+    @JsonProperty("board")
     private String board;
 
-    @SerializedName("vote_count")
+    @JsonProperty("vote_count")
     private Long voteCount;
 
-    @SerializedName("title")
+    @JsonProperty("title")
     private String title;
 
-    @SerializedName("summary")
+    @JsonProperty("summary")
     private String summary;
 
-    @SerializedName("created_at")
+    @JsonProperty("created_at")
     private String createdAt;
     
-    @SerializedName("updated_at")
+    @JsonProperty("updated_at")
     private String updatedAt;
 
-    @SerializedName("thumbnail")
+    @JsonProperty("thumbnail")
     private String thumbnail;
 
-    @SerializedName("thumbnail_original")
+    @JsonProperty("thumbnail_original")
     private String thumbnailOriginal;
 
-    @SerializedName("notice_type")
+    @JsonProperty("notice_type")
     private String notice_type;
 }

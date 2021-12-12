@@ -1,23 +1,15 @@
 package com.jjangchen.crawler.service.coinone;
 
-import com.jjangchen.common.model.Exchange;
-import com.jjangchen.common.repository.QuoteRepository;
-import com.jjangchen.crawler.client.CoinoneRestApiClient;
-import com.jjangchen.crawler.client.quote.coinone.CoinoneTickerResponse;
-import com.jjangchen.crawler.client.quote.coinone.RequestCoinoneTicker;
-import com.jjangchen.crawler.dto.QuoteSaveDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import retrofit2.Response;
-
-import java.io.IOException;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class CoinoneQuoteService {
-    private final CoinoneRestApiClient coinoneRestApiClient;
+    /*
+    private final CoinoneQuoteRestClient coinoneRestApiClient;
     private final QuoteRepository quoteRepository;
 
     public Runnable getBTCTicker(Long timestamp) {
@@ -69,4 +61,6 @@ public class CoinoneQuoteService {
             }
         };
     }
+
+     */
 }

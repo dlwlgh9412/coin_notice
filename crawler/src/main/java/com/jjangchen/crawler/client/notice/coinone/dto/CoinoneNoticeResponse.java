@@ -1,7 +1,7 @@
-package com.jjangchen.crawler.client.notice.coinone;
+package com.jjangchen.crawler.client.notice.coinone.dto;
 
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,15 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public class CoinoneNoticeResponse {
-    @SerializedName("count")
+    @JsonProperty("count")
     private Long count;
 
-    @SerializedName("next")
+    @JsonProperty("next")
     private String next;
 
-    @SerializedName("previous")
+    @JsonProperty("previous")
     private String previous;
 
-    @SerializedName("results")
+    @JsonProperty("results")
     private List<CoinoneNoticeData> coinoneNoticeData;
 }

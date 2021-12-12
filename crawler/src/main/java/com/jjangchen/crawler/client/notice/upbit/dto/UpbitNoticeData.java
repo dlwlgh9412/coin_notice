@@ -1,6 +1,6 @@
-package com.jjangchen.crawler.client.notice.upbit;
+package com.jjangchen.crawler.client.notice.upbit.dto;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,15 +13,15 @@ import java.util.List;
 @Builder
 @Getter
 public class UpbitNoticeData {
-    @SerializedName("total_count")
+    @JsonProperty("total_count")
     private Long totalCount;
 
-    @SerializedName("total_page")
+    @JsonProperty("total_page")
     private Long totalPages;
 
-    @SerializedName("list")
+    @JsonProperty("list")
     private List<UpbitNoticeInfo> list;
 
-    @SerializedName("fixed_notices")
+    @JsonProperty("fixed_notices")
     private List<UpbitNoticeInfo> fixedNotices;
 }

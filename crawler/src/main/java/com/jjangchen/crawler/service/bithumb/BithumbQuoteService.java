@@ -2,7 +2,6 @@ package com.jjangchen.crawler.service.bithumb;
 
 import com.jjangchen.common.model.Exchange;
 import com.jjangchen.common.repository.QuoteRepository;
-import com.jjangchen.crawler.client.BithumbRestApiClient;
 import com.jjangchen.crawler.client.quote.Bithumb.BithumbCurrency;
 import com.jjangchen.crawler.client.quote.Bithumb.BithumbTickerResponse;
 import com.jjangchen.crawler.client.quote.Bithumb.RequestBithumbTicker;
@@ -18,6 +17,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class BithumbQuoteService  {
+    /*
     private final BithumbRestApiClient restApiClient;
     private final QuoteRepository quoteRepository;
 
@@ -76,4 +76,6 @@ public class BithumbQuoteService  {
             }
         };
     }
+
+     */
 }

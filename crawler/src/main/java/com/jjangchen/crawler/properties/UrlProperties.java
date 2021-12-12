@@ -14,9 +14,10 @@ public class UrlProperties {
     @Value("${upbit.eventUrl}")
     private String upbitEventUrl;
 
-    @Value("${upbit.endPoint}")
-    private String upbitEndPoint;
+    @Value("${upbit.apiUrl}")
+    private String upbitApiUrl;
 
+    /*
     @Value("${binance.endPoint}")
     private String binanceEndPoint;
 
@@ -25,7 +26,10 @@ public class UrlProperties {
 
     @Value("${bithumb.endPoint}")
     private String bithumbEndPoint;
+     */
+    @Value("${coinone.eventUrl}")
+    private String coinoneEventUrl;
 
-    @Value("${coinone.endPoint}")
-    private String coinoneEndPoint;
+    @Value("${coinone.apiUrl}")
+    private String coinoneApiUrl;
 }

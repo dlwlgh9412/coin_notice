@@ -2,7 +2,6 @@ package com.jjangchen.crawler.service.binance;
 
 import com.jjangchen.common.model.Exchange;
 import com.jjangchen.common.repository.QuoteRepository;
-import com.jjangchen.crawler.client.BinanceRestApiClient;
 import com.jjangchen.crawler.client.quote.binance.BinanceSymbol;
 import com.jjangchen.crawler.client.quote.binance.BinanceTickerResponse;
 import com.jjangchen.crawler.client.quote.binance.RequestBinanceTicker;
@@ -18,6 +17,7 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class BinanceQuoteService {
+    /*
     private final BinanceRestApiClient restApiClient;
     private final QuoteRepository quoteRepository;
 

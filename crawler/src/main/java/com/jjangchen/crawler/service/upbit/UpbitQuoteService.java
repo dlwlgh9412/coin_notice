@@ -2,7 +2,6 @@ package com.jjangchen.crawler.service.upbit;
 
 import com.jjangchen.common.model.Exchange;
 import com.jjangchen.common.repository.QuoteRepository;
-import com.jjangchen.crawler.client.UpbitRestApiClient;
 import com.jjangchen.crawler.client.quote.upbit.*;
 import com.jjangchen.crawler.dto.QuoteSaveDto;
 import com.jjangchen.crawler.util.QuoteUtil;
@@ -18,10 +17,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UpbitQuoteService {
+    /*
     private final UpbitRestApiClient restApiClient;
     private final RequestUpbitTicker requestUpbitTicker = RequestUpbitTicker.builder().build();
     private final QuoteRepository quoteRepository;
-    /*
     public void candleStickByOneMinute() {
         RequestUpbitCandleStick requestUpbitCandleStick = RequestUpbitCandleStick.builder()
                 .market(UpbitMarket.KRWBTC.getMarket())
@@ -42,7 +41,6 @@ public class UpbitQuoteService {
         }
     }
 
-     */
 
     public Runnable getBTCTicker(Long timeStamp) {
         return new Runnable() {
@@ -93,4 +91,5 @@ public class UpbitQuoteService {
             }
         };
     }
+    */
 }

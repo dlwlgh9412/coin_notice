@@ -1,6 +1,6 @@
-package com.jjangchen.crawler.client.notice.upbit;
+package com.jjangchen.crawler.client.notice.upbit.dto;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,18 +11,18 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 public class UpbitNoticeInfo {
-    @SerializedName("created_at")
+    @JsonProperty("created_at")
     private String createdAt;
 
-    @SerializedName("updated_at")
+    @JsonProperty("updated_at")
     private String updatedAt;
 
-    @SerializedName("id")
+    @JsonProperty("id")
     private Integer id;
 
-    @SerializedName("title")
+    @JsonProperty("title")
     private String title;
 
-    @SerializedName("view_count")
+    @JsonProperty("view_count")
     private Long viewCount;
 }

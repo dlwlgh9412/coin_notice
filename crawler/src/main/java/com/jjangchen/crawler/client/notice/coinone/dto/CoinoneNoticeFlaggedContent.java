@@ -1,6 +1,6 @@
-package com.jjangchen.crawler.client.notice.coinone;
+package com.jjangchen.crawler.client.notice.coinone.dto;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class CoinoneNoticeFlaggedContent {
-    @SerializedName("status")
+    @JsonProperty("status")
     private String status;
 }

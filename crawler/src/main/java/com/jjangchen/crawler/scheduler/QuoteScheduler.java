@@ -7,6 +7,9 @@ import com.jjangchen.crawler.service.coinone.CoinoneQuoteService;
 import com.jjangchen.crawler.service.upbit.UpbitQuoteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -16,7 +19,7 @@ import java.time.LocalDateTime;
 
 
 @Slf4j
-@Component
+//@Component
 public class QuoteScheduler {
     private final BinanceQuoteService binanceQuoteService;
     private final BithumbQuoteService bithumbQuoteService;
@@ -30,7 +33,8 @@ public class QuoteScheduler {
                           CoinbaseQuoteService coinbaseQuoteService,
                           UpbitQuoteService upbitQuoteService,
                           CoinoneQuoteService coinoneQuoteService,
-                          @Qualifier("taskExecutor") TaskExecutor taskExecutor) {
+                          @Qualifier("taskExecutor") TaskExecutor taskExecutor
+                          ) {
         this.binanceQuoteService = binanceQuoteService;
         this.bithumbQuoteService = bithumbQuoteService;
         this.coinbaseQuoteService = coinbaseQuoteService;
@@ -42,6 +46,7 @@ public class QuoteScheduler {
     @Scheduled(cron = "0 0/1 * * * ?")
     public void getQuote() {
         Long timeStamp = (Timestamp.valueOf(LocalDateTime.now()).getTime() / 100) * 100;
+        /*
         executor.execute(binanceQuoteService.getBTCTicker(timeStamp));
         executor.execute(binanceQuoteService.getETHTicker(timeStamp));
         executor.execute(bithumbQuoteService.getBTCTicker(timeStamp));
@@ -52,5 +57,7 @@ public class QuoteScheduler {
         executor.execute(upbitQuoteService.getETHTicker(timeStamp));
         executor.execute(coinoneQuoteService.getBTCTicker(timeStamp));
         executor.execute(coinoneQuoteService.getETHTicker(timeStamp));
+
+         */
     }
 }

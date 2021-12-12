@@ -1,6 +1,6 @@
-package com.jjangchen.crawler.client.notice.coinone;
+package com.jjangchen.crawler.client.notice.coinone.dto;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,33 +9,33 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class CoinoneNoticeDataWriter {
-    @SerializedName("uuid")
+    @JsonProperty("uuid")
     private String uuid;
 
-    @SerializedName("trading_level")
+    @JsonProperty("trading_level")
     private Integer tradingLevel;
 
-    @SerializedName("nickname")
+    @JsonProperty("nickname")
     private String nickName;
 
-    @SerializedName("comment_count")
+    @JsonProperty("comment_count")
     private Long commentCount;
 
-    @SerializedName("thread_count")
+    @JsonProperty("thread_count")
     private Long threadCount;
 
-    @SerializedName("vote_count")
+    @JsonProperty("vote_count")
     private Long voteCount;
 
-    @SerializedName("level")
+    @JsonProperty("level")
     private Integer level;
 
-    @SerializedName("signature")
+    @JsonProperty("signature")
     private String signature;
 
-    @SerializedName("user_type")
+    @JsonProperty("user_type")
     private String userType;
 
-    @SerializedName("is_blocked")
+    @JsonProperty("is_blocked")
     private Boolean isBlocked;
 }
