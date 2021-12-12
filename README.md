@@ -16,3 +16,5 @@
 crawler - 스케쥴러를 이용하여 일정시간마다 크롤링 수행
 
 Retrofit -> WebClient로 변경
+
+Kafka를 이용하여 이메일 발송 서버 구현 중
