@@ -1,4 +1,4 @@
-# coin_notice
+corini로 코드 재작성 중 # https://github.com/dlwlgh9412/corini
 
 코인 거래소들의 공지사항, 이벤트 게시글 및 현재가(Ticker)를 수집하여 제공
 
