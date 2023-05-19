@@ -1,8 +1,13 @@
 package com.jjangchen.crawler.service.upbit;
 
+import com.jjangchen.common.converter.DateConverter;
 import com.jjangchen.common.model.Exchange;
 import com.jjangchen.common.repository.QuoteRepository;
+import com.jjangchen.crawler.client.UpbitRestApiService;
 import com.jjangchen.crawler.client.quote.upbit.*;
+import com.jjangchen.crawler.client.quote.upbit.candleStick.RequestUpbitCandleStick;
+import com.jjangchen.crawler.client.quote.upbit.candleStick.UpbitCandleStickData;
+import com.jjangchen.crawler.client.quote.upbit.candleStick.UpbitCandleStickInterval;
 import com.jjangchen.crawler.dto.QuoteSaveDto;
 import com.jjangchen.crawler.util.QuoteUtil;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +22,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UpbitQuoteService {
-    /*
-    private final UpbitRestApiClient restApiClient;
+    private final UpbitRestApiService restApiService;
     private final RequestUpbitTicker requestUpbitTicker = RequestUpbitTicker.builder().build();
     private final QuoteRepository quoteRepository;
     public void candleStickByOneMinute() {
@@ -28,7 +32,7 @@ public class UpbitQuoteService {
                 .count(1)
                 .build();
         try {
-            Response<List<UpbitCandleStickData>> response = restApiClient.getCandleStick(requestUpbitCandleStick.toPath(), requestUpbitCandleStick.toQueryMap()).execute();
+            Response<List<UpbitCandleStickData>> response = restApiService.getCandleStick(requestUpbitCandleStick.toPath(), requestUpbitCandleStick.toQueryMap()).execute();
             if(response.isSuccessful()) {
                 UpbitCandleStickData data = response.body().get(0);
                 log.info("TimeStamp: {}", DateConverter.stringToEpoch(data.getCandleDateTimeKst()));
@@ -48,7 +52,7 @@ public class UpbitQuoteService {
             public void run() {
                 requestUpbitTicker.setUpbitMarket(UpbitMarket.KRWBTC);
                 try {
-                    Response<List<UpbitTickerResponse>> response = restApiClient.getTicker(requestUpbitTicker).execute();
+                    Response<List<UpbitTickerResponse>> response = restApiService.getTicker(requestUpbitTicker.getUpbitMarket().getMarket()).execute();
                     if (response.isSuccessful()) {
                         QuoteSaveDto saveDto = QuoteSaveDto.builder()
                                 .exchange(Exchange.UPBIT)
@@ -73,7 +77,7 @@ public class UpbitQuoteService {
             public void run() {
                 requestUpbitTicker.setUpbitMarket(UpbitMarket.KRWETH);
                 try {
-                    Response<List<UpbitTickerResponse>> response = restApiClient.getTicker(requestUpbitTicker).execute();
+                    Response<List<UpbitTickerResponse>> response = restApiService.getTicker(requestUpbitTicker.getUpbitMarket().getMarket()).execute();
                     if (response.isSuccessful()) {
                         QuoteSaveDto saveDto = QuoteSaveDto.builder()
                                 .exchange(Exchange.UPBIT)
@@ -91,5 +95,4 @@ public class UpbitQuoteService {
             }
         };
     }
-    */
 }

@@ -2,7 +2,10 @@ package com.jjangchen.crawler.service.coinbase;
 
 import com.jjangchen.common.model.Exchange;
 import com.jjangchen.common.repository.QuoteRepository;
+import com.jjangchen.crawler.client.CoinbaseRestApiService;
 import com.jjangchen.crawler.client.quote.coinbase.*;
+import com.jjangchen.crawler.client.quote.coinbase.candleStick.CoinbaseCandleStickIntervals;
+import com.jjangchen.crawler.client.quote.coinbase.candleStick.RequestCoinbaseCandleStick;
 import com.jjangchen.crawler.dto.QuoteSaveDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,13 +13,14 @@ import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class CoinbaseQuoteService {
-    /*
-    private final CoinbaseRestApiClient restApiClient;
+    private final CoinbaseRestApiService restApiService;
     private final QuoteRepository quoteRepository;
 
     public Runnable getBTCTicker(Long timeStamp) {
@@ -24,7 +28,7 @@ public class CoinbaseQuoteService {
             @Override
             public void run() {
                 try {
-                    Response<CoinbaseCurrencyData> response = restApiClient.getCurrency(CoinBaseMarket.BTC.getMarket()).execute();
+                    Response<CoinbaseCurrencyData> response = restApiService.getCurrency(CoinBaseMarket.BTC.getMarket()).execute();
                     if(response.isSuccessful()) {
                         QuoteSaveDto saveDto = QuoteSaveDto.builder()
                                 .currency(CoinBaseMarket.BTC.getMarket())
@@ -48,7 +52,7 @@ public class CoinbaseQuoteService {
             @Override
             public void run() {
                 try {
-                    Response<CoinbaseCurrencyData> response = restApiClient.getCurrency(CoinBaseMarket.ETH.getMarket()).execute();
+                    Response<CoinbaseCurrencyData> response = restApiService.getCurrency(CoinBaseMarket.ETH.getMarket()).execute();
                     if(response.isSuccessful()) {
                         QuoteSaveDto saveDto = QuoteSaveDto.builder()
                                 .currency(CoinBaseMarket.BTC.getMarket())
@@ -66,11 +70,10 @@ public class CoinbaseQuoteService {
             }
         };
     }
-    /*
     private void getTime() {
         try {
             log.info("coinbase getTime Start: {}", LocalDateTime.now());
-            Response<CoinbaseCurrentTimeData> response = restApiClient.getCurrentTime().execute();
+            Response<CoinbaseCurrentTimeData> response = restApiService.getCurrentTime().execute();
             log.info("coinbase getTime end: {}", LocalDateTime.now());
 
             if(response.isSuccessful()) {
@@ -90,7 +93,7 @@ public class CoinbaseQuoteService {
                 .interval(CoinbaseCandleStickIntervals.OneMinute)
                 .build();
         try {
-            Response<List<List<Object>>> response = restApiClient.getCandles(requestCoinbaseCandleStick).execute();
+            Response<List<List<Object>>> response = restApiService.getCandles(requestCoinbaseCandleStick.toPath(), requestCoinbaseCandleStick.toQueryMap()).execute();
             if(response.isSuccessful()) {
                 List<List<Object>> body = response.body();
                 log.info("time: {}", body.get(0).get(0));
@@ -102,6 +105,4 @@ public class CoinbaseQuoteService {
             e.printStackTrace();
         }
     }
-
-     */
 }

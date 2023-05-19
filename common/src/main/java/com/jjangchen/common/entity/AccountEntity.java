@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/*
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,9 +19,8 @@ import java.util.List;
 @DynamicUpdate
 @Entity(name = "TBL_ACCOUNT")
 
- */
 public class AccountEntity {
-    /*
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -50,7 +48,7 @@ public class AccountEntity {
     @Enumerated
     private Role role;
 
-     */
+
 
     /*
     @OneToMany(mappedBy = "accountEntity", cascade = CascadeType.ALL)

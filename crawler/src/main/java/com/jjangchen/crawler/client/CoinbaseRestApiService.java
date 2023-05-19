@@ -2,6 +2,7 @@ package com.jjangchen.crawler.client;
 
 import com.jjangchen.crawler.client.quote.coinbase.CoinbaseCurrencyData;
 import com.jjangchen.crawler.client.quote.coinbase.CoinbaseCurrentTimeData;
+import org.springframework.stereotype.Component;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -11,6 +12,7 @@ import retrofit2.http.QueryMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public interface CoinbaseRestApiService {
     @GET("products/{product_id}/candles")
     Call<List<List<Object>>> getCandles(@Path("product_id") String path, @QueryMap Map<String, Object> queryMap);

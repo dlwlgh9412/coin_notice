@@ -2,9 +2,12 @@ package com.jjangchen.crawler.service.binance;
 
 import com.jjangchen.common.model.Exchange;
 import com.jjangchen.common.repository.QuoteRepository;
+import com.jjangchen.crawler.client.BinanceRestApiService;
 import com.jjangchen.crawler.client.quote.binance.BinanceSymbol;
 import com.jjangchen.crawler.client.quote.binance.BinanceTickerResponse;
 import com.jjangchen.crawler.client.quote.binance.RequestBinanceTicker;
+import com.jjangchen.crawler.client.quote.binance.candleStick.BinanceCandleStickInterval;
+import com.jjangchen.crawler.client.quote.binance.candleStick.RequestBinanceCandleStick;
 import com.jjangchen.crawler.dto.QuoteSaveDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,13 +15,13 @@ import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class BinanceQuoteService {
-    /*
-    private final BinanceRestApiClient restApiClient;
+    private final BinanceRestApiService restApiService;
     private final QuoteRepository quoteRepository;
 
     public Runnable getBTCTicker(Long timeStamp) {
@@ -29,7 +32,7 @@ public class BinanceQuoteService {
                         .symbol(BinanceSymbol.BTCUSDT.getSymbol())
                         .build();
                 try {
-                    Response<BinanceTickerResponse> response = restApiClient.getTicker(requestBTCTicker).execute();
+                    Response<BinanceTickerResponse> response = restApiService.getTicker(requestBTCTicker.getSymbol()).execute();
                     if(response.isSuccessful()) {
                         QuoteSaveDto saveDto = QuoteSaveDto.builder()
                                 .exchange(Exchange.BINANCE)
@@ -56,7 +59,7 @@ public class BinanceQuoteService {
                         .symbol(BinanceSymbol.ETHUSDT.getSymbol())
                         .build();
                 try {
-                    Response<BinanceTickerResponse> response = restApiClient.getTicker(requestETHTicker).execute();
+                    Response<BinanceTickerResponse> response = restApiService.getTicker(requestETHTicker.getSymbol()).execute();
                     if(response.isSuccessful()) {
                         QuoteSaveDto saveDto = QuoteSaveDto.builder()
                                 .exchange(Exchange.BINANCE)
@@ -75,7 +78,6 @@ public class BinanceQuoteService {
         };
     }
 
-    /*
     public void candleStickByOneMinute() {
         RequestBinanceCandleStick requestBinanceCandleStick = RequestBinanceCandleStick.builder()
                 .symbol("BTCUSDT")
@@ -83,7 +85,7 @@ public class BinanceQuoteService {
                 .limit(1)
                 .build();
         try {
-            Response<List<List<Object>>> response = restApiClient.getCandleStick(requestBinanceCandleStick.toQueryMap()).execute();
+            Response<List<List<Object>>> response = restApiService.getCandlesStick(requestBinanceCandleStick.toQueryMap()).execute();
             if(response.isSuccessful()) {
                 List<List<Object>> objects = response.body();
                 log.info("Time Stamp: {}", Double.valueOf(objects.get(0).get(0).toString()).longValue());
@@ -95,5 +97,4 @@ public class BinanceQuoteService {
             e.printStackTrace();
         }
     }
-     */
 }

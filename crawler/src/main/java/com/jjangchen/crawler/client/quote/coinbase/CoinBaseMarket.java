@@ -2,7 +2,8 @@ package com.jjangchen.crawler.client.quote.coinbase;
 
 public enum CoinBaseMarket {
     BTC("BTC"),
-    ETH("ETH");
+    ETH("ETH"),
+    BTCUSDT("BTC-USDT");
 
     String currency;
 

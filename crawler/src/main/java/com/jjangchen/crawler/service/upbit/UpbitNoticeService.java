@@ -40,7 +40,8 @@ public class UpbitNoticeService {
                         .updDtime(ZonedDateTime.parse(upbitNoticeInfo.getCreatedAt()))
                         .build())
                 .collect(Collectors.toList());
-        return noticeRepository.saveAll(noticeEntities) != null ? Exchange.UPBIT : null;
+        noticeRepository.saveAll(noticeEntities);
+        return Exchange.UPBIT;
 
         /*
         Response<UpbitNoticeResponse<UpbitNoticeData>> response = restApiClient.getNotices("general").execute();

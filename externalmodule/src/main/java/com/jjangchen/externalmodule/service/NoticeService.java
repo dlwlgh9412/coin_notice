@@ -1,6 +1,5 @@
 package com.jjangchen.externalmodule.service;
 
-import com.jjangchen.common.repository.ExchangeNotificationRepository;
 import com.jjangchen.externalmodule.web.model.notice.Notice;
 import com.jjangchen.externalmodule.web.model.notice.NoticePageResponse;
 import com.jjangchen.common.entity.NoticeEntity;
@@ -20,8 +19,6 @@ import java.util.stream.Collectors;
 @Service
 public class NoticeService {
     private final NoticeCustomRepository noticeRepository;
-    private final ExchangeNotificationRepository exchangeNotificationRepository;
-    private final JWTService jwtService;
 
     public NoticePageResponse findNotices(Exchange exchange, NoticeKind noticeKind, String keyword, Integer page) {
         PageRequest pageRequest = PageRequest.of(page, 10);
@@ -47,22 +44,4 @@ public class NoticeService {
         result.setCode(200);
         return result;
     }
-
-    /*
-    public Boolean alarmSetting(String token, Exchange exchange, Boolean param) throws EmailNullException, AccountNotFoundException, SignatureException, ExpiredJwtException {
-        Claims claims = jwtService.parseToken(token);
-        String social = claims.get("social").toString();
-        AccountEntity accountEntity = accountRepository.findByEmail(id).orElseThrow(AccountNotFoundException::new);
-        if(accountEntity.getEmail() == null)
-            throw new EmailNullException();
-
-        ExchangeNotification exchangeNotification = exchangeNotificationRepository.findByUserAndExchange(accountEntity, exchange).orElseGet(() -> ExchangeNotification.builder()
-                .exchange(exchange)
-                .notification(param)
-                .build());
-
-        return exchangeNotificationRepository.save(exchangeNotification).getNotification();
-    }
-
-     */
 }

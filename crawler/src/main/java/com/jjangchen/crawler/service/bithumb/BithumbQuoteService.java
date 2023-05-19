@@ -2,6 +2,7 @@ package com.jjangchen.crawler.service.bithumb;
 
 import com.jjangchen.common.model.Exchange;
 import com.jjangchen.common.repository.QuoteRepository;
+import com.jjangchen.crawler.client.BithumbRestApiService;
 import com.jjangchen.crawler.client.quote.Bithumb.BithumbCurrency;
 import com.jjangchen.crawler.client.quote.Bithumb.BithumbTickerResponse;
 import com.jjangchen.crawler.client.quote.Bithumb.RequestBithumbTicker;
@@ -17,8 +18,8 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class BithumbQuoteService  {
-    /*
-    private final BithumbRestApiClient restApiClient;
+
+    private final BithumbRestApiService restApiService;
     private final QuoteRepository quoteRepository;
 
     public Runnable getBTCTicker(Long timeStamp) {
@@ -30,7 +31,7 @@ public class BithumbQuoteService  {
                         .paymentCurrency(BithumbCurrency.KRW.getCurrency())
                         .build();
                 try {
-                    Response<BithumbTickerResponse> response = restApiClient.getTicker(data).execute();
+                    Response<BithumbTickerResponse> response = restApiService.getTicker(data.getOrderCurrency(), data.getPaymentCurrency()).execute();
                     if(response.isSuccessful()) {
                         QuoteSaveDto saveDto = QuoteSaveDto.builder()
                                 .exchange(Exchange.BITHUMB)
@@ -58,7 +59,7 @@ public class BithumbQuoteService  {
                         .paymentCurrency(BithumbCurrency.KRW.getCurrency())
                         .build();
                 try {
-                    Response<BithumbTickerResponse> response = restApiClient.getTicker(data).execute();
+                    Response<BithumbTickerResponse> response = restApiService.getTicker(data.getOrderCurrency(), data.getPaymentCurrency()).execute();
                     if(response.isSuccessful()) {
                         QuoteSaveDto saveDto = QuoteSaveDto.builder()
                                 .exchange(Exchange.BITHUMB)
@@ -76,6 +77,4 @@ public class BithumbQuoteService  {
             }
         };
     }
-
-     */
 }
