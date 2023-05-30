@@ -7,7 +7,11 @@
 * 2021.10 ~ 2021.1
 
 ## ⚙️ 개발환경
-
+- Spring Boot
+- JAVA 13
+- Spring Data Jpa
+- QueryDsl
+- Mysql
 ## 📌 주요 기능
 - 크롤링
   - 스케쥴러를 이용하여 거래소별 공지사항, 이벤트 관련 게시글 크롤링
